@@ -1,0 +1,100 @@
+<div class="page-container">
+  <div class="background-pattern"></div>
+
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>Add New Vehicle</h1>
+      <p class="subtitle">Enter your vehicle details</p>
+    </div>
+  </div>
+
+  <div class="content-container">
+    <form [formGroup]="carForm" (ngSubmit)="onSubmit()" class="form-card">
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="year">Year</label>
+          <div class="select-wrapper">
+            <select id="year" formControlName="year">
+              <option value="" disabled selected>Select Year</option>
+              <option *ngFor="let year of obdYears" [value]="year">{{year}}</option>
+            </select>
+            <mat-icon>expand_more</mat-icon>
+          </div>
+          <div class="error-message" *ngIf="carForm.get('year')?.touched && carForm.get('year')?.errors?.['required']">
+            Year is required
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="make">Make</label>
+          <div class="select-wrapper">
+            <select id="make" formControlName="make">
+              <option value="" disabled selected>Select Make</option>
+              <option *ngFor="let m of obdMakes" [value]="m">{{m}}</option>
+            </select>
+            <mat-icon>expand_more</mat-icon>
+          </div>
+          <div class="error-message" *ngIf="carForm.get('make')?.touched && carForm.get('make')?.errors?.['required']">
+            Make is required
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="model">Model</label>
+          <div class="select-wrapper">
+            <select id="model" formControlName="model" [disabled]="!carForm.get('make')?.value">
+              <option value="" disabled selected>Select Model</option>
+              <option *ngFor="let mod of obdModels" [value]="mod">{{mod}}</option>
+            </select>
+            <mat-icon>expand_more</mat-icon>
+          </div>
+          <div class="error-message" *ngIf="carForm.get('model')?.touched && carForm.get('model')?.errors?.['required']">
+            Model is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Body Style</label>
+        <div class="body-type-grid">
+          <div class="body-type-option"
+               *ngFor="let style of obdStyles"
+               [class.selected]="carForm.get('bodyType')?.value === style"
+               (click)="selectBodyType(style)">
+            <span>{{style}}</span>
+          </div>
+        </div>
+        <div class="error-message" *ngIf="carForm.get('bodyType')?.touched && carForm.get('bodyType')?.errors?.['required']">
+          Body style is required
+        </div>
+      </div>
+
+      <div class="form-field mileage">
+        <label for="mileage">Mileage</label>
+        <div class="input-wrapper">
+          <input id="mileage"
+                 type="number"
+                 formControlName="millage"
+                 placeholder="Enter mileage">
+          <span class="unit">km</span>
+        </div>
+        <div class="error-message" *ngIf="carForm.get('millage')?.touched && carForm.get('millage')?.hasError('required')">
+          Mileage is required
+        </div>
+        <div class="error-message" *ngIf="carForm.get('millage')?.touched && carForm.get('millage')?.hasError('min')">
+          Mileage must be positive
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-reset" (click)="resetForm()">
+          Reset
+        </button>
+        <button type="submit" class="btn btn-continue" [disabled]="!carForm.valid">
+          Add Vehicle
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

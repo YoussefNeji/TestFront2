@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage Management System</title>
+    <link rel="stylesheet" href="garages-admin.component.scss">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Garage Management System</h1>
+        </header>
+        
+        <section class="add-garage-section">
+            <h2>Add New Garage</h2>
+            <form [formGroup]="garageadminForm" (ngSubmit)="onSubmit()" class="form-card">
+                <div class="form-group">
+                    <label for="name">Garage Name</label>
+                    <input type="text" id="name" formControlName="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" formControlName="location" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact">Contact</label>
+                    <input type="text" id="contact" formControlName="contact" required>
+                </div>
+                
+                <div class="opening-hours-container">
+                    <h3>Opening Hours</h3>
+                    <div formArrayName="openingHours">
+                        <div *ngFor="let hour of openingHoursFormArray.controls; let i = index" [formGroupName]="i" class="opening-hour-item">
+                            <div class="form-group">
+                                <label>Day</label>
+                                <select formControlName="day" required>
+                                    <option *ngFor="let d of days" [value]="d">{{ d }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Opening Time</label>
+                                <input type="time" formControlName="openingTime" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Closing Time</label>
+                                <input type="time" formControlName="closingTime" required>
+                            </div>
+                            <button type="button" (click)="removeOpeningHour(i)" class="btn btn-danger">Remove</button>
+                        </div>
+                    </div>
+                    <button type="button" (click)="addOpeningHour()" class="btn btn-secondary">Add Another Opening Hour</button>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Add Garage</button>
+                </div>
+            </form>
+        </section>
+        
+        
+        <section class="garages-list-section">
+            <h2>Garages</h2>
+            <div class="garages-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Contact</th>
+                            <th>Opening Hours</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let garage of garages">
+                            <td><input id="name" formControlName="name" value="{{ garage.name }}"/></td>
+                            <td><input id="location" formControlName="location" value="{{ garage.location }}"/></td>
+                            <td><input id="contact" formControlName="contact" value="{{ garage.contact }}"/></td>
+                            <td colspan="4">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Day</th>
+                                            <th>Opening Time</th>
+                                            <th>Closing Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let hour of garage.openingHours">
+                                            <span [innerHTML]="text"></span>
+                                            <select formControlName="day" value="{{hour.day}}">
+                                                <option *ngFor="let d of days" [value]="d">{{ d }}</option>
+                                            </select>
+                                            <span [innerHTML]="text"></span>
+                                            <td><input type="time" value="{{ hour.openingTime }}" ></td>
+                                            <span [innerHTML]="text"></span>
+                                            <td><input type="time" value="{{ hour.closingTime }}" ></td>
+                                            <span [innerHTML]="text"></span>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="actions">
+                                <button (click)="editGarage(garage)" class="btn btn-edit">Edit</button>
+                                <button (click)="deleteGarage(garage.garageId)" class="btn btn-delete">Delete</button>
+                            </td>
+                            <tr>
+                            
+                            </tr>
+                        <tr *ngIf="garages.length === 0">
+                            <td colspan="4" class="no-data">No garages found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+
+    
+
+    </div>
+
+</body>
+</html>

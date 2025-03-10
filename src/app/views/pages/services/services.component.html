@@ -1,0 +1,13 @@
+
+<app-header></app-header>
+<section class="services">
+  <h2>Our Services</h2>
+  <div class="services-grid">
+    <div class="service-card" *ngFor="let service of services">
+      <mat-icon>{{ service.icon }}</mat-icon>
+      <h3>{{ service.title }}</h3>
+      <p>{{ service.description }}</p>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

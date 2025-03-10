@@ -1,0 +1,69 @@
+<div class="privacy-policy-container">
+  <header class="policy-header">
+    <h1>Privacy Policy & Data Deletion</h1>
+    <p>Last updated: {{ currentDate | date:'longDate' }}</p>
+  </header>
+
+  <section class="policy-overview">
+    <p>
+      At AutoCare, we are committed to protecting your privacy and ensuring the security of your personal information.
+      This policy outlines how we collect, use, and protect your data, as well as your rights and options for data management.
+    </p>
+  </section>
+
+  <section class="policy-details">
+    <h2>Privacy Policy</h2>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let point of policyPoints">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ point.title }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>{{ point.content }}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+  <section class="data-deletion">
+    <h2>Data Deletion Instructions</h2>
+    <p>
+      You have the right to request the deletion of your personal data. Please follow these steps to initiate the data deletion process:
+    </p>
+    <ol>
+      <li *ngFor="let step of deletionSteps">{{ step }}</li>
+    </ol>
+    <div class="deletion-notes">
+      <p>
+        <strong>Note:</strong> Data deletion is irreversible. This process will remove all your personal information and vehicle data from our systems.
+      </p>
+      <p>
+        Please be aware that some information may be retained for legal or administrative purposes, as required by law.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact-info">
+    <h2>Contact Us</h2>
+    <p>
+      If you have any questions about our privacy policy or data deletion process, please contact our Data Protection Officer:
+    </p>
+    <div class="contact-details">
+      <p><strong>Email:</strong> privacy&#64;autocare.com</p>
+      <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+      <p><strong>Address:</strong> 123 Privacy Lane, Secure City, ST 12345, USA</p>
+    </div>
+  </section>
+
+  <div class="policy-actions">
+    <button mat-raised-button color="primary">
+      <mat-icon>download</mat-icon>
+      Download Privacy Policy
+    </button>
+    <button mat-raised-button color="warn">
+      <mat-icon>delete</mat-icon>
+      Request Data Deletion
+    </button>
+  </div>
+</div>
+

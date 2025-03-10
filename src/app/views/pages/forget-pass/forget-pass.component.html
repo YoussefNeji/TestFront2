@@ -1,0 +1,5 @@
+<h3>Forgot Password</h3>
+<p *ngIf="message">{{message}}</p>
+
+<input type="email" [(ngModel)]="email" placeholder="Enter your email" />
+<button (click)="sendResetLink()">Send Reset Link</button>

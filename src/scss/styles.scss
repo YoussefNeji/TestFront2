@@ -1,0 +1,98 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss/utilities';
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
+
+// ... (keep the :root and .dark styles from the previous config)
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles with default layout.
+@import "@coreui/coreui/scss/coreui";
+
+// Import Chart.js custom tooltips styles
+@import "@coreui/chartjs/scss/coreui-chartjs";
+
+// Custom styles for this theme
+@import "theme";
+
+// Some temp fixes
+//@import "fixes";
+
+// If you want to add custom CSS you can put it here.
+@import "custom";
+
+// Examples
+// We use those styles to show code examples, you should remove them in your application.
+@import "examples";
+@import '@angular/material/prebuilt-themes/purple-green.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: white;
+  color: black;
+  min-height: 100vh;
+}
+
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.mat-form-field-label {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.mat-input-element {
+  caret-color: white;
+  color: white;
+}
+
+.mat-raised-button.mat-primary {
+  background: linear-gradient(45deg, #3498db, #8e44ad);
+}
+
+.mat-stroked-button {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.mat-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}

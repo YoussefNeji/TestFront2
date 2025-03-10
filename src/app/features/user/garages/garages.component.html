@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoCare Dashboard</title>
+    <link rel="stylesheet" href="garages.component.scss">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-car-side"></i>
+                <h2>AutoCare</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="active">
+                    <a href="#">
+                        <i class="fas fa-th-large"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-car"></i>
+                        <span>Vehicles</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-bell"></i>
+                        <span>Notifications</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-crown"></i>
+                        <span>Premium</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-warehouse"></i>
+                        <span>Garages</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h4>user name</h4>
+                    <p>Premium Member</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="header-icons">
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">1</span>
+                    </div>
+                    <div class="settings">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard">
+                <h1>Welcome back, user</h1>
+
+                <!-- Stats Cards -->
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p>Total Vehicles</p>
+                            <h2>3</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p>Healthy Status</p>
+                            <h2>1</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon yellow">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p>Needs Attention</p>
+                            <h2>1</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p>Critical Issues</p>
+                            <h2>1</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vehicles Section -->
+                <div class="vehicles-section">
+                    <div class="section-header">
+                        <h2>Your Vehicles</h2>
+                        <button class="add-vehicle-btn">
+                            <i class="fas fa-plus"></i>
+                            Add Vehicle
+                        </button>
+                    </div>
+
+                    <div class="vehicle-cards">
+                        <!-- Toyota Camry -->
+                        <div class="vehicle-card">
+                            <div class="vehicle-image">
+                                <!-- Placeholder for vehicle image -->
+                            </div>
+                            <div class="vehicle-details">
+                                <div class="vehicle-name">
+                                    <h3>Toyota Camry</h3>
+                                    <span class="status good">Good</span>
+                                </div>
+                                <div class="vehicle-stats">
+                                    <div class="stat">
+                                        <i class="fas fa-battery-three-quarters"></i>
+                                        <span>92 %</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="fas fa-road"></i>
+                                        <span>45,230</span>
+                                    </div>
+                                </div>
+                                <div class="vehicle-dates">
+                                    <div class="date">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>2023-11-15</span>
+                                    </div>
+                                    <div class="date">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <span>2024-06-30</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tesla Model 3 -->
+                        <div class="vehicle-card">
+                            <div class="vehicle-image">
+                                <!-- Placeholder for vehicle image -->
+                            </div>
+                            <div class="vehicle-details">
+                                <div class="vehicle-name">
+                                    <h3>Tesla Model 3</h3>
+                                    <span class="status attention">Needs Attention</span>
+                                </div>
+                                <div class="vehicle-stats">
+                                    <div class="stat">
+                                        <i class="fas fa-battery-three-quarters"></i>
+                                        <span>88 %</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="fas fa-road"></i>
+                                        <span>28,450</span>
+                                    </div>
+                                </div>
+                                <div class="vehicle-dates">
+                                    <div class="date">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>N/A</span>
+                                    </div>
+                                    <div class="date">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <span>2024-08-15</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BMW X5 -->
+                        <div class="vehicle-card">
+                            <div class="vehicle-image">
+                                <!-- Placeholder for vehicle image -->
+                            </div>
+                            <div class="vehicle-details">
+                                <div class="vehicle-name">
+                                    <h3>BMW X5</h3>
+                                    <span class="status warning">Warning</span>
+                                </div>
+                                <div class="vehicle-stats">
+                                    <div class="stat">
+                                        <i class="fas fa-battery-three-quarters"></i>
+                                        <span>76 %</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="fas fa-road"></i>
+                                        <span>52,120</span>
+                                    </div>
+                                </div>
+                                <div class="vehicle-dates">
+                                    <div class="date">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>2023-10-01</span>
+                                    </div>
+                                    <div class="date">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <span>2024-03-20</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Sections -->
+                <div class="bottom-sections">
+                    <!-- Recent Activities -->
+                    <div class="activities-section">
+                        <h2>Recent Activities</h2>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon blue">
+                                    <i class="fas fa-wrench"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4>Toyota Camry</h4>
+                                    <p>Oil change completed</p>
+                                    <span class="activity-date">2024-01-15</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon red">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4>BMW X5</h4>
+                                    <p>Tire pressure low</p>
+                                    <span class="activity-date">2024-01-14</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon green">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4>Tesla Model 3</h4>
+                                    <p>Battery health check</p>
+                                    <span class="activity-date">2024-01-13</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div class="notifications-section">
+                        <h2>Notifications</h2>
+                        <div class="notification-list">
+                            <div class="notification-item">
+                                <div class="notification-icon yellow">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="notification-details">
+                                    <h4>Maintenance Due</h4>
+                                    <p>Toyota Camry is due for service</p>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-icon red">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="notification-details">
+                                    <h4>Insurance Expiring</h4>
+                                    <p>BMW X5 insurance expires in 30 days</p>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-icon blue">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="notification-details">
+                                    <h4>System Update</h4>
+                                    <p>New features available in premium</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

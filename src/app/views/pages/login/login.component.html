@@ -1,0 +1,72 @@
+<div class="login-container">
+  <div class="left-panel">
+    <div class="content-overlay">
+      <h1>Intelligent Vehicle Maintenance</h1>
+      <p>Keep your vehicle in top condition with our AI-powered maintenance system</p>
+    </div>
+    <div class="image-overlay"></div>
+    <img src="https://blog.reparacion-vehiculos.es/hs-fs/hubfs/Digitalizacion%20talleres%20mecanicos.jpg?width=1448&name=Digitalizacion%20talleres%20mecanicos.jpg"
+         alt="Professional mechanic working on car engine"
+         class="background-image">
+  </div>
+  <div class="right-panel">
+    <div class="login-card">
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Log in to manage your vehicle maintenance</p>
+
+      <div class="social-buttons">
+        <button class="social-button google" (click)="signInWithGoogle()">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+          Continue with Google
+        </button>
+        <button class="social-button github" (click)="signInWithGitHub()">
+          <i class="fab fa-github"></i>
+          Continue with GitHub
+        </button>
+      </div>
+
+      <div class="divider">
+        <span>or</span>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+          <label for="email">Email address</label>
+          <div class="input-wrapper">
+            <input id="email" type="email" formControlName="email" placeholder="Enter your email">
+            <i class="fas fa-envelope"></i>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <input id="password"
+                   [type]="hidePassword ? 'password' : 'text'"
+                   formControlName="password"
+                   placeholder="Enter your password">
+            <i class="fas" [class.fa-eye]="hidePassword" [class.fa-eye-slash]="!hidePassword"
+               (click)="hidePassword = !hidePassword"></i>
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label class="checkbox-wrapper">
+            <input type="checkbox" formControlName="rememberMe">
+            <span class="checkmark"></span>
+            <span>Remember me</span>
+          </label>
+          <a routerLink="/forget-pass" class="forgot-password">Forgot password?</a>
+        </div>
+
+        <button type="submit" [disabled]="!loginForm.valid">
+          Log In
+        </button>
+      </form>
+
+      <p class="signup-link">
+        Don't have an account? <a routerLink="/register">Sign up</a>
+      </p>
+    </div>
+  </div>
+</div>

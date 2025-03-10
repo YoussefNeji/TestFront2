@@ -1,0 +1,14 @@
+<app-header></app-header>
+<section class="garages">
+  <h2>Partner Garages</h2>
+  <div class="garages-grid">
+    <div class="garage-card" *ngFor="let garage of garages">
+      <img [src]="garage.image" [alt]="garage.name">
+      <h3>{{ garage.name }}</h3>
+      <p>{{ garage.location }}</p>
+      <p>Rating: {{ garage.rating }}/5</p>
+      <button mat-raised-button color="custom-color">Book Appointment</button>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

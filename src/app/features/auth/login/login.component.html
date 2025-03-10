@@ -1,0 +1,27 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Welcome Back</h2>
+    <p>Sign in to continue to AutoCare</p>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Enter your email" required>
+        <mat-icon matSuffix>email</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Enter your password" required>
+        <mat-icon matSuffix>lock</mat-icon>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" >Sign In</button>
+    </form>
+    <div class="social-login">
+      <p>Or continue with</p>
+      <div class="social-buttons">
+        <button mat-stroked-button><i class="fab fa-google"></i> Google</button>
+        <button mat-stroked-button><i class="fab fa-facebook-f"></i> Facebook</button>
+      </div>
+    </div>
+    <p class="register-link">Don't have an account? <a routerLink="/register">Sign up</a></p>
+  </div>
+</div>

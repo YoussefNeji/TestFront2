@@ -1,0 +1,89 @@
+<app-header></app-header>
+
+<main class="about-page">
+  <!-- heroo section -->
+  <section class="hero">
+    <div class="hero-content" @fadeIn>
+      <h1>About AutoCare</h1>
+      <p class="subtitle">Revolutionizing Vehicle Maintenance Management</p>
+      <div class="stats-grid">
+        <div class="stat-card" *ngFor="let stat of stats">
+          <h3>{{ stat.number }}</h3>
+          <p>{{ stat.label }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- story section -->
+  <section class="story-section" @fadeIn>
+    <div class="container">
+      <div class="story-content">
+        <div class="story-text">
+          <h2>Our Story</h2>
+          <p>
+            Founded in 2024, AutoCare emerged from a simple idea: to make vehicle maintenance as smart and efficient as the cars themselves. Our team of automotive enthusiasts and tech innovators came together with a shared vision of leveraging cutting-edge technology to simplify and optimize vehicle care.
+          </p>
+          <p>
+            Today, AutoCare is at the forefront of the digital transformation in vehicle maintenance. We've grown from a small startup to a trusted partner for thousands of vehicle owners and fleet managers across the country.
+          </p>
+        </div>
+        <div class="story-image">
+          <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" alt="Team working together">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vvlues section -->
+  <section class="values-section" @fadeIn>
+    <div class="container">
+      <h2>Our Values</h2>
+      <div class="values-grid">
+        <div class="value-card" *ngFor="let value of values">
+          <mat-icon>{{ value.icon }}</mat-icon>
+          <h3>{{ value.title }}</h3>
+          <p>{{ value.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- team section -->
+  <section class="team-section" @fadeIn>
+    <div class="container">
+      <h2>Meet Our Team</h2>
+      <div class="team-grid">
+        <div class="team-card" *ngFor="let member of teamMembers">
+          <div class="member-image">
+            <img [src]="member.image" [alt]="member.name">
+          </div>
+          <div class="member-info">
+            <h3>{{ member.name }}</h3>
+            <p class="position">{{ member.position }}</p>
+            <p class="bio">{{ member.bio }}</p>
+            <div class="social-links">
+              <a [href]="member.social.linkedin" target="_blank" class="social-link">
+                <mat-icon>linkedin</mat-icon>
+              </a>
+              <a [href]="member.social.twitter" target="_blank" class="social-link">
+                <mat-icon>twitter</mat-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA section -->
+  <section class="cta-section" @fadeIn>
+    <div class="container">
+      <h2>Ready to Transform Your Vehicle Maintenance?</h2>
+      <p>Join thousands of satisfied users who trust AutoCare with their vehicle maintenance needs.</p>
+      <button mat-raised-button color="primary">Get Started Today</button>
+    </div>
+  </section>
+</main>
+
+<app-footer></app-footer>

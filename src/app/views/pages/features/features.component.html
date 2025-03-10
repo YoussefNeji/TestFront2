@@ -1,0 +1,15 @@
+<app-header></app-header>
+
+<section class="features">
+  <h2>Key Features</h2>
+  <div class="features-grid">
+    <div class="feature-card" *ngFor="let feature of features">
+      <div class="icon">
+        <mat-icon>{{ feature.icon }}</mat-icon>
+      </div>
+      <h3>{{ feature.title }}</h3>
+      <p>{{ feature.description }}</p>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

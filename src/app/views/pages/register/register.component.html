@@ -1,0 +1,205 @@
+<div class="register-container" xmlns="http://www.w3.org/1999/html">
+  <!--left-->
+  <div class="left-panel">
+    <div class="logo">
+      <span>AutoCare</span>
+    </div>
+
+    <div class="content">
+      <h1>Intelligent Vehicle Maintenance Management</h1>
+      <p>AI-powered solution for optimal car care and performance</p>
+
+      <div class="features">
+        <div class="feature-item">
+          <div class="icon">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="feature-content">
+            <h3>Predictive AI</h3>
+            <p>Personalized maintenance schedule based on your car model and usage</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="icon">
+            <i class="fas fa-tools"></i>
+          </div>
+          <div class="feature-content">
+            <h3>Real-Time Monitoring</h3>
+            <p>Continuous vehicle health tracking and smart alerts</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="icon">
+            <i class="fas fa-crown"></i>
+          </div>
+          <div class="feature-content">
+            <h3>Premium Services</h3>
+            <p>Seasonal advice and fuel efficiency monitoring</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <p>"AutoCare has revolutionized how I manage my car's maintenance. The smart notifications and personalized recommendations are indispensable."</p>
+        <div class="testimonial-author">
+          <span>Ferchici Salim, Premium Client</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--right-->
+  <div class="right-panel">
+    <div class="register-card">
+      <h2>Create your account</h2>
+      <p class="subtitle">Start your journey. No credit card required.</p>
+
+      <div class="social-buttons">
+        <button class="social-button google" (click)="signInWithGoogle()">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+          Continue with Google
+        </button>
+        <button class="social-button github" (click)="signInWithGitHub()">
+          <i class="fab fa-github"></i>
+          Continue with GitHub
+        </button>
+      </div>
+
+      <div class="divider">
+        <span>or continue with</span>
+      </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-section">
+          <h3>Personal Information</h3>
+
+          <div class="form-field">
+            <label for="username">Full Name</label>
+            <div class="input-wrapper">
+              <input id="username" type="text" formControlName="username" placeholder="Enter your full name">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="cin">CIN</label>
+              <div class="input-wrapper">
+                <input id="cin" type="text" formControlName="cin" placeholder="Enter your CIN">
+                <i class="fas fa-id-card"></i>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="phone">Phone Number</label>
+              <div class="input-wrapper">
+                <input id="phone" type="tel" formControlName="phone" placeholder="Enter your phone number">
+                <i class="fas fa-phone"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="dob">Date of Birth</label>
+            <div class="input-wrapper">
+              <input id="dob" type="date" formControlName="dateOfBirth">
+              <i class="fas fa-calendar"></i>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label>Gender</label>
+            <div class="gender-toggle">
+              <input type="radio" id="male" formControlName="gender" value="male">
+              <label for="male">Male</label>
+              <input type="radio" id="female" formControlName="gender" value="female">
+              <label for="female">Female</label>
+              <input type="radio" id="other" formControlName="gender" value="other">
+              <label for="other">Other</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>Account Information</h3>
+
+          <div class="form-field">
+            <label for="email">Email Address</label>
+            <div class="input-wrapper">
+              <input id="email" type="email" formControlName="email" placeholder="Enter your email">
+              <i class="fas fa-envelope"></i>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="password">Password</label>
+              <div class="input-wrapper">
+                <input id="password"
+                       [type]="hidePassword ? 'password' : 'text'"
+                       formControlName="password"
+                       placeholder="Create a password">
+                <i class="fas" [class.fa-eye]="hidePassword" [class.fa-eye-slash]="!hidePassword"
+                   (click)="hidePassword = !hidePassword"></i>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="confirmPassword">Confirm Password</label>
+              <div class="input-wrapper">
+                <input id="confirmPassword"
+                       [type]="hideConfirmPassword ? 'password' : 'text'"
+                       formControlName="confirmPassword"
+                       placeholder="Confirm password">
+                <i class="fas" [class.fa-eye]="hideConfirmPassword" [class.fa-eye-slash]="!hideConfirmPassword"
+                   (click)="hideConfirmPassword = !hideConfirmPassword"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="country">Country</label>
+            <div class="input-wrapper">
+              <select id="country" formControlName="country">
+                <option value="">Select your country</option>
+                <option *ngFor="let country of countries" [value]="country.name.common">
+                  {{country.name.common}}
+                </option>
+              </select>
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="address">Address</label>
+            <div class="input-wrapper">
+            <input id="address" formControlName="address" placeholder="Enter your address">
+              <i class="fas fa-home"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="terms-section">
+          <label class="checkbox-wrapper">
+            <input type="checkbox" formControlName="terms">
+            <span class="checkmark"></span>
+            <span class="terms-text">
+            By creating an account, you agree to our
+            <a routerLink="#">Terms of Service</a> and <a routerLink="/privacy-policy">Privacy Policy</a>
+          </span>
+          </label>
+        </div>
+
+        <button type="submit" [disabled]="!registerForm.valid">
+          Create Account
+        </button>
+      </form>
+
+      <p class="login-link">
+        Already have an account? <a routerLink="/login">Sign in</a>
+      </p>
+    </div>
+  </div>
+</div>

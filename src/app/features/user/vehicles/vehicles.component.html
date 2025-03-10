@@ -1,0 +1,118 @@
+<div class="vehicles-dashboard">
+  <div class="dashboard-header">
+    <div class="header-left">
+      <h1>My Vehicles</h1>
+      <div class="stats">
+        <span class="total">
+          <i class="icon-car"></i>
+          Total Vehicles: {{ vehicles.length }}
+        </span>
+        <span class="warning">
+          <i class="icon-warning"></i>
+        </span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="search-field">
+        <i class="icon-search"></i>
+        <input type="text" placeholder="Search vehicles..." (input)="onSearch($event)">
+      </div>
+      <button class="btn btn-primary" routerLink="/add-car">
+        <i class="icon-plus"></i>
+        Add Vehicle
+      </button>
+    </div>
+  </div>
+
+
+  <div class="filters">
+    <div class="select-wrapper">
+      <select (change)="onFilterChange($event, 'manufacturer')">
+        <option value="">All Manufacturers</option>
+        <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">{{ manufacturer }}</option>
+      </select>
+    </div>
+    <div class="select-wrapper">
+      <select (change)="onFilterChange($event, 'status')">
+        <option value="">All Status</option>
+        <option value="Excellent">Excellent</option>
+        <option value="Good">Good</option>
+        <option value="Fair">Fair</option>
+        <option value="Need Check">Need Check</option>
+      </select>
+    </div>
+    <div class="select-wrapper">
+      <select (change)="onSortChange($event)">
+        <option value="">Sort By</option>
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="mileageLow">Mileage: Low to High</option>
+        <option value="mileageHigh">Mileage: High to Low</option>
+      </select>
+    </div>
+  </div>
+
+
+  <div class="vehicles-grid">
+    <div *ngFor="let vehicle of filteredVehicles" class="vehicle-card">
+      <div class="card-header">
+        <h2>{{ vehicle.make }} {{ vehicle.model }}</h2>
+        <div class="dropdown">
+          <button class="btn-icon">
+              <i class="fas fa-ellipsis-v"></i>
+          </button>
+          <div class="dropdown-content">
+            <a [routerLink]="['/edit-car', vehicle.id]" class="dropdown-item"><i class="icon-edit"></i> Edit</a>
+            <a [routerLink]="['/car-view', vehicle.id]" class="dropdown-item"><i class="icon-view"></i> View</a>
+            <a href="#" class="dropdown-item text-danger" (click)="onDeleteVehicle(vehicle)"><i class="icon-delete"></i> Delete</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-content">
+        <div class="vehicle-info">
+          <div class="info-row">
+            <span class="label">Year:</span>
+            <span class="value">{{ vehicle.year }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Body Type:</span>
+            <span class="value">{{ vehicle.bodyType }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Mileage:</span>
+            <span class="value">{{ vehicle.mileage }} km</span>
+          </div>
+        </div>
+        <div class="vehicle-status">
+          <div class="status-badge" [ngClass]="vehicle.condition.toLowerCase()">
+            <i class="icon-check"></i>
+            {{ vehicle.condition }}
+          </div>
+          <div class="last-check">
+            Last Check: {{ vehicle.lastCheck }}
+          </div>
+        </div>
+        <div class="insurance-info">
+          <i class="icon-shield"></i>
+          Insurance Valid Until: {{ vehicle.insuranceValidUntil }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="premium-features">
+    <div class="feature-card maintenance">
+      <i class="icon-wrench"></i>
+      <h3>Seasonal Maintenance Tips</h3>
+      <p>Get personalized maintenance advice based on your vehicle's condition and the season.</p>
+      <button class="btn btn-outline" routerLink="/premium">View Recommendations</button>
+    </div>
+    <div class="feature-card efficiency">
+      <i class="icon-speedometer"></i>
+      <h3>Fuel Efficiency Monitor</h3>
+      <p>Track and optimize your vehicle's fuel consumption with AI-powered insights.</p>
+      <button class="btn btn-outline">View Analytics</button>
+    </div>
+  </div>
+</div>

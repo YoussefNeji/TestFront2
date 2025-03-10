@@ -1,0 +1,54 @@
+<div class="premium-container">
+  <div class="background-pattern"></div>
+
+  <section class="hero">
+    <h1>Upgrade Your Vehicle Management Experience</h1>
+    <p>Choose the premium plan that best fits your needs and take control of your vehicle maintenance</p>
+  </section>
+
+  <section class="plans">
+    <div class="plan-grid">
+      <div *ngFor="let plan of premiumPlans" class="plan-card" [class.recommended]="plan.recommended">
+        <div class="plan-header">
+          <h2>{{ plan.name }}</h2>
+          <div class="price">
+            <span class="amount">${{ plan.price }}</span>
+            <span class="interval">/ {{ plan.interval }}</span>
+          </div>
+        </div>
+        <ul class="features">
+          <li *ngFor="let feature of plan.features">
+            <mat-icon>check_circle</mat-icon>
+            <span>{{ feature }}</span>
+          </li>
+        </ul>
+        <button (click)="selectPlan(plan)" class="select-plan">
+          Get Started
+        </button>
+        <div *ngIf="plan.recommended" class="recommended-badge">Best Value</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits">
+    <h2>Why Choose AutoCare Premium?</h2>
+    <div class="benefits-grid">
+      <div class="benefit">
+        <mat-icon>update</mat-icon>
+        <h3>Real-time Updates</h3>
+        <p>Get instant notifications about your vehicle's health and maintenance needs.</p>
+      </div>
+      <div class="benefit">
+        <mat-icon>savings</mat-icon>
+        <h3>Cost Savings</h3>
+        <p>Prevent costly repairs with proactive maintenance recommendations.</p>
+      </div>
+      <div class="benefit">
+        <mat-icon>speed</mat-icon>
+        <h3>Performance Optimization</h3>
+        <p>Keep your vehicle running at peak performance with tailored advice.</p>
+      </div>
+    </div>
+  </section>
+</div>
+

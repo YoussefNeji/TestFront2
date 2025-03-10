@@ -1,0 +1,64 @@
+<app-header></app-header>
+<main>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content" data-animate>
+      <div class="brand-badge">AUTOCARE</div>
+      <h1>Intelligent Vehicle Maintenance Management</h1>
+      <p>Keep your vehicle in top condition with our AI-powered maintenance scheduling and tracking system</p>
+      <div class="cta-buttons">
+        <button class="btn-primary" routerLink="/login">Start Managing Your Vehicles</button>
+      </div>
+      <div class="metrics">
+        <div class="metric" data-animate>
+          <span>50,000+ vehicles managed</span>
+        </div>
+        <div class="metric" data-animate>
+          <span>4.9/5 user rating</span>
+        </div>
+        <div class="metric" data-animate>
+          <span>1,000+ partner garages</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <h2 data-animate>Why Choose AutoCare</h2>
+    <div class="features-grid">
+      <div class="feature-card" *ngFor="let feature of features" data-animate>
+        <div class="icon">
+          <mat-icon>{{ feature.icon }}</mat-icon>
+        </div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits">
+    <h2 data-animate>Benefits of Using AutoCare</h2>
+    <div class="benefits-grid">
+      <div class="benefit-card" *ngFor="let benefit of benefits" data-animate>
+        <h3>{{ benefit.title }}</h3>
+        <p>{{ benefit.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <h2 data-animate>What Our Users Say</h2>
+    <div class="testimonial-carousel">
+      <div class="testimonial" *ngFor="let testimonial of testimonials" data-animate>
+        <blockquote>{{ testimonial.quote }}</blockquote>
+        <cite>{{ testimonial.author }}, {{ testimonial.company }}</cite>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>
+

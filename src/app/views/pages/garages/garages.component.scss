@@ -1,0 +1,59 @@
+.garages {
+  padding: 4rem 5%;
+  background: #f7fafc;
+
+  h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+    color: #1a202c;
+  }
+
+  .garages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+
+    .garage-card {
+      padding: 2rem;
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+
+      img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #1a202c;
+      }
+
+      p {
+        color: #4a5568;
+        margin-bottom: 0.5rem;
+      }
+
+      button {
+        margin-top: 1rem;
+      }
+    }
+  }
+}
+.custom-color {
+  background-color: #3182ce;
+  color: white;
+}
+@media (max-width: 768px) {
+  .garages-grid {
+    grid-template-columns: 1fr;
+  }
+}

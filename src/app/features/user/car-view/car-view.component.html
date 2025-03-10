@@ -1,0 +1,80 @@
+<div class="page-container" *ngIf="car">
+  <div class="background-pattern"></div>
+
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>{{ car.year }} {{ car.make }} {{ car.model }}</h1>
+      <p class="subtitle">Vehicle Details & Required Maintenance</p>
+    </div>
+  </div>
+
+  <div class="content-container">
+    <div class="info-card vehicle-info-card">
+      <div class="card-header">
+        <h2>Vehicle Information</h2>
+        <div class="mileage-badge">
+          <span class="mileage-value">{{ car.millage }}</span>
+          <span class="mileage-unit">km</span>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-icon">
+            <mat-icon>calendar_today</mat-icon>
+          </div>
+          <div class="info-content">
+            <span class="info-label">Year</span>
+            <span class="info-value">{{ car.year }}</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <mat-icon>business</mat-icon>
+          </div>
+          <div class="info-content">
+            <span class="info-label">Make</span>
+            <span class="info-value">{{ car.make }}</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <mat-icon>directions_car</mat-icon>
+          </div>
+          <div class="info-content">
+            <span class="info-label">Model</span>
+            <span class="info-value">{{ car.model }}</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <mat-icon>category</mat-icon>
+          </div>
+          <div class="info-content">
+            <span class="info-label">Body Style</span>
+            <span class="info-value">{{ car.body_Style.join(', ') }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card maintenance-card">
+      <div class="card-header">
+        <h2>Required Maintenance</h2>
+        <p class="maintenance-subtitle">Based on current mileage</p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item" *ngFor="let item of maintenanceItems">
+          <div class="info-icon">
+            <mat-icon>build</mat-icon>
+          </div>
+          <div class="info-content">
+            <span class="info-value">{{ item }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
