@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, FormsModule } from '@angular/forms';
 import { GarageService } from './../../../services/garage.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -10,11 +10,14 @@ import { catchError, of, tap } from 'rxjs';
   selector: 'app-garages',
   templateUrl: './garages-admin.component.html',
   styleUrls: ['./garages-admin.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule,FormsModule]
 })
 export class GaragesAdminComponent implements OnInit, AfterViewInit {
+  [x: string]: any;
   garageadminForm!: FormGroup;
   garages: any[] = [];
+  displaygarages: any[] = [];
+  openingHours: any[] = [];
   text = "&nbsp;";
   maxOpeningHours = 6;
   selectedDays: string[] = [];
@@ -40,7 +43,7 @@ export class GaragesAdminComponent implements OnInit, AfterViewInit {
 
   loadGarages(): void {
     this.garageService.getGarages().subscribe((data: any) => {
-      this.garages = data;
+      this.displaygarages = data;
     }
     );
   }
@@ -59,8 +62,10 @@ export class GaragesAdminComponent implements OnInit, AfterViewInit {
     return this.garageadminForm.get('openingHours') as FormArray;
   }
 
+
   createOpeningHour(): FormGroup {
     return this.fb.group({
+      idOpeningHour: [''],
       day: ['', [Validators.required, this.validateDaySelection.bind(this)]],
       openingTime: ['', Validators.required],
       closingTime: ['', Validators.required]
@@ -74,6 +79,7 @@ export class GaragesAdminComponent implements OnInit, AfterViewInit {
       alert('You can only add up to 6 opening hours.');
     }
   }
+
 
   removeOpeningHour(index: number): void {
     const removedDay = this.openingHoursFormArray.at(index).value.day;
@@ -149,25 +155,25 @@ export class GaragesAdminComponent implements OnInit, AfterViewInit {
 
 
 
-  editGarage(garage:any): void {
-    console.log("the garage is ",garage);
-    if (this.garageadminForm.valid) {
-      const updatedGarage = this.garageadminForm.value;
-      this.garageService.updateGarage(updatedGarage.id, updatedGarage).pipe(
-        tap((response: any) => {
-          console.log('Garage updated successfully:', response);
-          const index = this.garages.findIndex((g) => g.id === updatedGarage.id);
-          this.garages[index] = updatedGarage;
-          this.modal.nativeElement.classList.add('hidden');
-        }),
-        catchError((error) => {
-          console.error('Error updating garage:', error);
-          return of(null);
-        })
-      ).subscribe();
-    } else {
-      console.log('Form is not valid');
-    }
+  editGarage(garage: any): void {
+    
+    console.log("Updated Garage:", garage);
+
+       const updatedGarage = garage;
+       const updatedGarageid = garage.garageId;
+      console.log("Updated Garage befor send from the subscribe = ", updatedGarage);
+
+       this.garageService.updateGarage(updatedGarageid, updatedGarage).pipe(
+         tap((response: any) => {
+           console.log('Garage updated successfully:', response);
+         }),
+         catchError((error) => {
+           console.error('Error updating garage:', error);
+             return of(null);
+         })
+       ).subscribe();
+
+
   }
 
   confirmDelete(id: number): void {

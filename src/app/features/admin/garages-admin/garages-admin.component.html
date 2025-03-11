@@ -14,7 +14,7 @@
         
         <section class="add-garage-section">
             <h2>Add New Garage</h2>
-            <form [formGroup]="garageadminForm" (ngSubmit)="onSubmit()" class="form-card">
+            <form  [formGroup]="garageadminForm" (ngSubmit)="onSubmit()" class="form-card">
                 <div class="form-group">
                     <label for="name">Garage Name</label>
                     <input type="text" id="name" formControlName="name" required>
@@ -70,49 +70,45 @@
                             <th>Name</th>
                             <th>Location</th>
                             <th>Contact</th>
-                            <th>Opening Hours</th>
+                            <th>Opening_D <span [innerHTML]="text"></span><span [innerHTML]="text"></span></th>
+                            <th  colspan="3">  Opening_H</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let garage of garages">
-                            <td><input id="name" formControlName="name" value="{{ garage.name }}"/></td>
-                            <td><input id="location" formControlName="location" value="{{ garage.location }}"/></td>
-                            <td><input id="contact" formControlName="contact" value="{{ garage.contact }}"/></td>
+                        <tr *ngFor="let garag of displaygarages">
+                            <td><input [(ngModel)]="garag.name"         value="{{ garag.name }}" /></td>
+                            <td><input [(ngModel)]="garag.location"     value="{{ garag.location }}"/></td>
+                            <td><input [(ngModel)]="garag.contact"      value="{{ garag.contact }}"/></td>
                             <td colspan="4">
                                 <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Day</th>
-                                            <th>Opening Time</th>
-                                            <th>Closing Time</th>
-                                        </tr>
-                                    </thead>
                                     <tbody>
-                                        <tr *ngFor="let hour of garage.openingHours">
+                                        <tr *ngFor="let hour of garag.openingHours">
+                                            <!-- hour.idOpeningHour -->
                                             <span [innerHTML]="text"></span>
-                                            <select formControlName="day" value="{{hour.day}}">
-                                                <option *ngFor="let d of days" [value]="d">{{ d }}</option>
-                                            </select>
+                                            <td><input type="text" [(ngModel)]="hour.day" [value]="hour.day"></td>
                                             <span [innerHTML]="text"></span>
-                                            <td><input type="time" value="{{ hour.openingTime }}" ></td>
+                                            <td><input type="time" [(ngModel)]="hour.openingTime" [value]="hour.openingTime"></td>
                                             <span [innerHTML]="text"></span>
-                                            <td><input type="time" value="{{ hour.closingTime }}" ></td>
+                                            <td><input type="time" [(ngModel)]="hour.closingTime" [value]="hour.closingTime"></td>
                                             <span [innerHTML]="text"></span>
+                                            
+                                               
+
                                         </tr>
                                     </tbody>
+                                    
                                 </table>
                             </td>
                             <td class="actions">
-                                <button (click)="editGarage(garage)" class="btn btn-edit">Edit</button>
-                                <button (click)="deleteGarage(garage.garageId)" class="btn btn-delete">Delete</button>
+                                <button (click)="editGarage(garag)" class="btn btn-success">Edit</button>
+                                <button (click)="deleteGarage(garag.garageId)" class="btn btn-danger">Delete</button>
                             </td>
                             <tr>
                             
                             </tr>
-                        <tr *ngIf="garages.length === 0">
-                            <td colspan="4" class="no-data">No garages found</td>
-                        </tr>
+                        
+                        <tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
                     </tbody>
                 </table>
             </div>
