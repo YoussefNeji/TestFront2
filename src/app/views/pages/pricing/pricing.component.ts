@@ -22,7 +22,6 @@ interface PremiumPlan {
     MatIcon,
     NgForOf,
     NgIf,
-    RouterLink,
     FooterComponent,
     HeaderComponent
   ]

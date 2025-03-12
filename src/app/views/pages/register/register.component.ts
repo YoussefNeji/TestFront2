@@ -19,7 +19,7 @@ import {CountryService} from "../../../services/country.service";
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
   standalone: true,
-  imports: [HttpClientModule, ReactiveFormsModule, MatInputModule, MatButtonModule, MatIconModule, RouterLink, FormsModule, MatCheckbox, MatSelect, MatOption, MatRadioButton, MatRadioGroup, MatDatepickerToggle, MatDatepickerInput, MatDatepicker, MatButtonToggle, MatButtonToggleGroup, NgForOf, NgIf]
+  imports: [HttpClientModule, ReactiveFormsModule, MatInputModule, MatButtonModule, MatIconModule, RouterLink, FormsModule, NgForOf,]
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;

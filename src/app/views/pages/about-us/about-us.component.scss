@@ -5,7 +5,7 @@ $text-color: #2d3748;
 $light-bg: #f7fafc;
 $white: #ffffff;
 $gradient: linear-gradient(135deg, $primary-color, $secondary-color);
-
+@use "sass:color";
 // Global Styles
 .container {
   max-width: 1200px;
@@ -262,8 +262,7 @@ $gradient: linear-gradient(135deg, $primary-color, $secondary-color);
     color: $primary-color;
 
     &:hover {
-      background: darken($white, 5%);
-    }
+      background: color.adjust($white, $lightness: -5%);    }
   }
 }
 
