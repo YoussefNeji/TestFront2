@@ -37,8 +37,13 @@
                             <div class="form-group">
                                 <label>Day</label>
                                 <select formControlName="day" required>
-                                    <option *ngFor="let d of days" [value]="d">{{ d }}</option>
-                                </select>
+                                    <option value="" disabled>Select day</option>
+                                    <option *ngFor="let d of days" 
+                                            [value]="d" 
+                                            [disabled]="isDaySelectedInForm(d, i)">
+                                      {{ d }}
+                                    </option>
+                                  </select>
                             </div>
                             <div class="form-group">
                                 <label>Opening Time</label>
@@ -51,7 +56,7 @@
                             <button type="button" (click)="removeOpeningHour(i)" class="btn btn-danger">Remove</button>
                         </div>
                     </div>
-                    <button type="button" (click)="addOpeningHour()" class="btn btn-secondary">Add Another Opening Hour</button>
+                    <button type="button" (click)="addOpeningHour()" class="btn btn-secondary">Add Opening Hour</button>
                 </div>
                 
                 <div class="form-actions">
@@ -77,38 +82,38 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let garag of displaygarages">
-                            <td><input [(ngModel)]="garag.name"         value="{{ garag.name }}" /></td>
-                            <td><input [(ngModel)]="garag.location"     value="{{ garag.location }}"/></td>
-                            <td><input [(ngModel)]="garag.contact"      value="{{ garag.contact }}"/></td>
+                            <td><input [(ngModel)]="garag.name" value="{{ garag.name }}" /></td>
+                            <td><input [(ngModel)]="garag.location" value="{{ garag.location }}"/></td>
+                            <td><input [(ngModel)]="garag.contact" value="{{ garag.contact }}"/></td>
                             <td colspan="4">
                                 <table>
                                     <tbody>
-                                        <tr *ngFor="let hour of garag.openingHours">
-                                            <!-- hour.idOpeningHour -->
-                                            <span [innerHTML]="text"></span>
-                                            <td><input type="text" [(ngModel)]="hour.day" [value]="hour.day"></td>
-                                            <span [innerHTML]="text"></span>
-                                            <td><input type="time" [(ngModel)]="hour.openingTime" [value]="hour.openingTime"></td>
-                                            <span [innerHTML]="text"></span>
-                                            <td><input type="time" [(ngModel)]="hour.closingTime" [value]="hour.closingTime"></td>
-                                            <span [innerHTML]="text"></span>
-                                            
-                                               
-
+                                        <tr *ngFor="let hour of garag.openingHours; let j = index">
+                                            <td>
+                                                <select [(ngModel)]="hour.day">
+                                                    <option value="" disabled>Select day</option>
+                                                    <option *ngFor="let day of days" 
+                                                            [value]="day" 
+                                                            [disabled]="isDaySelected(garag, day, j)">
+                                                        {{ day }}
+                                                    </option>
+                                                </select>
+                                            </td>&nbsp;&nbsp;
+                                            <td><input type="time" [(ngModel)]="hour.openingTime" [value]="hour.openingTime"></td>&nbsp;&nbsp;
+                                            <td><input type="time" [(ngModel)]="hour.closingTime" [value]="hour.closingTime"></td>&nbsp;&nbsp;
+                                            <td>
+                                                <button (click)="removeOpeningHour2(garag, j,hour.idOpeningHour)" class="btn btn-danger btn-sm">Remove</button>
+                                            </td>
                                         </tr>
                                     </tbody>
-                                    
                                 </table>
+                                &nbsp; &nbsp; <button (click)="addOpeningHour2(garag)" class="btn btn-primary">Add Opening Hours</button>&nbsp;
                             </td>
-                            <td class="actions">
-                                <button (click)="editGarage(garag)" class="btn btn-success">Edit</button>
-                                <button (click)="deleteGarage(garag.garageId)" class="btn btn-danger">Delete</button>
+                            <td class="actions" class="col text-center">
+                                &nbsp;<button (click)="editGarage(garag)" class="btn btn-success">Edit</button>&nbsp;
+                                &nbsp; &nbsp;<button (click)="deleteGarage(garag.garageId)" class="btn btn-danger">Delete</button>
                             </td>
-                            <tr>
-                            
-                            </tr>
-                        
-                        <tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+                        </tr>
                     </tbody>
                 </table>
             </div>

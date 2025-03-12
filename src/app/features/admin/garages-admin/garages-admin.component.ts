@@ -4,6 +4,7 @@ import { GarageService } from './../../../services/garage.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { catchError, of, tap } from 'rxjs';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -15,12 +16,15 @@ import { catchError, of, tap } from 'rxjs';
 export class GaragesAdminComponent implements OnInit, AfterViewInit {
   [x: string]: any;
   garageadminForm!: FormGroup;
+  garageadminForm2!: FormGroup;
   garages: any[] = [];
   displaygarages: any[] = [];
   openingHours: any[] = [];
+  openingHours2: any[] = [];
   text = "&nbsp;";
   maxOpeningHours = 6;
   selectedDays: string[] = [];
+  selectedDays2: string[] = [];
   days: string[] = [
     'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
   ];
@@ -35,17 +39,23 @@ export class GaragesAdminComponent implements OnInit, AfterViewInit {
       name: ['', Validators.required],
       location: ['', Validators.required],
       contact: ['', Validators.required],
-      openingHours: this.fb.array([this.createOpeningHour()])
+      openingHours: this.fb.array([])
     });
+
     this.loadGarages();
   }
-
 
   loadGarages(): void {
     this.garageService.getGarages().subscribe((data: any) => {
       this.displaygarages = data;
-    }
-    );
+      
+      // Ensure each garage has an openingHours array
+      this.displaygarages.forEach(garage => {
+        if (!garage.openingHours) {
+          garage.openingHours = [];
+        }
+      });
+    });
   }
 
   ngAfterViewInit() {
@@ -62,7 +72,6 @@ export class GaragesAdminComponent implements OnInit, AfterViewInit {
     return this.garageadminForm.get('openingHours') as FormArray;
   }
 
-
   createOpeningHour(): FormGroup {
     return this.fb.group({
       idOpeningHour: [''],
@@ -73,13 +82,32 @@ export class GaragesAdminComponent implements OnInit, AfterViewInit {
   }
 
   addOpeningHour(): void {
-    if (this.openingHoursFormArray.length < this.maxOpeningHours) {
-      this.openingHoursFormArray.push(this.createOpeningHour());
-    } else {
-      alert('You can only add up to 6 opening hours.');
+    if (this.openingHoursFormArray.length >= 7) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "You can only add up to 7 opening hours (one for each day).",
+      });
+      return;
     }
+    
+    const selectedDays = this.openingHoursFormArray.controls.map(control => 
+      control.get('day')?.value
+    ).filter(day => day);
+    
+    const availableDay = this.days.find(day => 
+      !selectedDays.includes(day)
+    ) || '';
+    
+    const newOpeningHourGroup = this.fb.group({
+      idOpeningHour: [''],
+      day: [availableDay, [Validators.required, this.validateDaySelection.bind(this)]],
+      openingTime: ['09:00', Validators.required],
+      closingTime: ['17:00', Validators.required]
+    });
+    
+    this.openingHoursFormArray.push(newOpeningHourGroup);
   }
-
 
   removeOpeningHour(index: number): void {
     const removedDay = this.openingHoursFormArray.at(index).value.day;
@@ -98,6 +126,13 @@ export class GaragesAdminComponent implements OnInit, AfterViewInit {
       this.garageService.addGarage(newGarage).pipe(
         tap((response: any) => {
           console.log('Garage added successfully:', response);
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "added successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
           this.garages.push(newGarage);
           this.resetForm();
         }),
@@ -108,7 +143,83 @@ export class GaragesAdminComponent implements OnInit, AfterViewInit {
       ).subscribe();
     } else {
       console.log('Form is not valid');
+      Swal.fire({
+        title: "Form Is Not Valid",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      });
     }
+  }
+
+  isDaySelected(garage: any, day: string, currentIndex: number): boolean {
+  if (!garage.openingHours) return false;
+  
+  // Check if the day is selected in any other opening hour entry
+  return garage.openingHours.some((hour: any, index: number) => 
+    hour.day === day && index !== currentIndex
+  );
+  }
+
+  addOpeningHour2(garage: any): void {
+  if (garage.openingHours && garage.openingHours.length >= 7) {
+    alert('You can only add up to 7 opening hours (one for each day).');
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "You can only add up to 7 opening hours (one for each day).",
+    });
+    return;
+  }
+  
+  const availableDay = this.days.find(day => 
+    !garage.openingHours.some((hour: any) => hour.day === day)
+  ) || '';
+  
+  const newOpeningHour = {
+    day: availableDay,
+    openingTime: '09:00',
+    closingTime: '17:00'
+  };
+  
+  if (!garage.openingHours) {
+    garage.openingHours = [];
+  }
+  
+  garage.openingHours.push(newOpeningHour);
+  }
+  
+  removeOpeningHour2(garage: any, index: number,idd: number): void {
+    // Remove the opening hour at the specified index
+    console.log("the garage before remove = ",garage);
+    console.log("the id  of O_P= ", idd);
+    if (garage.openingHours && garage.openingHours.length > index) {
+      garage.openingHours.splice(index, 1);
+    }
+    console.log("the garage after remove = ",garage);
+    console.log("the index = ",index);
+
+    this.garageService.DeleteOpeningHour(idd).pipe(
+      tap((response: any) => {
+        console.log('Opening Hour deleted successfully:', response);
+      }),
+      catchError((error) => {
+        console.error('Error deleting opening hour:', error);
+        return of(null);
+      })
+    ).subscribe();
+
   }
 
   resetForm(): void {
@@ -132,18 +243,37 @@ export class GaragesAdminComponent implements OnInit, AfterViewInit {
   }
 
   validateDaySelection(control: any) {
-    if (this.selectedDays.includes(control.value)) {
-      return { dayTaken: true };
-    }
-    return null;
+    
+    const formArray = this.openingHoursFormArray;
+    
+    const isDuplicate = formArray.controls.some((formGroup, index) => {
+      const dayControl = formGroup.get('day');
+      if (dayControl === control) return false;
+      return dayControl?.value === control.value;
+    });
+    
+    return isDuplicate ? { dayTaken: true } : null;
   }
 
+  isDaySelectedInForm(day: string, currentIndex: number): boolean {
+    return this.openingHoursFormArray.controls.some((formGroup, index) => {
+      if (index === currentIndex) return false;
+      return formGroup.get('day')?.value === day;
+    });
+  }
 
   deleteGarage(id: number): void {
     console.log("the id is  =",id);
     this.garageService.deleteGarage(id).pipe(
       tap((response: any) => {
         console.log('Garage deleted successfully:', response);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Garage deleted successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
         this.garages = this.garages.filter((garage) => garage.id !== id);
       }),
       catchError((error) => {
@@ -152,8 +282,6 @@ export class GaragesAdminComponent implements OnInit, AfterViewInit {
       })
     ).subscribe();
   }
-
-
 
   editGarage(garage: any): void {
     
@@ -166,6 +294,13 @@ export class GaragesAdminComponent implements OnInit, AfterViewInit {
        this.garageService.updateGarage(updatedGarageid, updatedGarage).pipe(
          tap((response: any) => {
            console.log('Garage updated successfully:', response);
+           Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Garage updated successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
          }),
          catchError((error) => {
            console.error('Error updating garage:', error);
@@ -183,3 +318,5 @@ export class GaragesAdminComponent implements OnInit, AfterViewInit {
   }
 
 }
+
+

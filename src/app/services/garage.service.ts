@@ -26,6 +26,9 @@ export class GarageService {
     return this.http.put(`${this.apiUrl}/UpdateGarage/${id}`, garage);
   }
 
+  DeleteOpeningHour(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/DeleteOpeningHour/${id}`);
+  }
 
 
 }
